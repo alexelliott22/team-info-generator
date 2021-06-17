@@ -1,0 +1,27 @@
+{
+  "name": "team-info-generator",
+  "version": "1.0.0",
+  "description": "creates a website that displays team data",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "inquirer": "^8.1.1",
+    "jest": "^27.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexelliott22/team-info-generator.git"
+  },
+  "author": "Alex Elliott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexelliott22/team-info-generator/issues"
+  },
+  "homepage": "https://github.com/alexelliott22/team-info-generator#readme"
+}
