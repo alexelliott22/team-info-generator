@@ -1,8 +1,6 @@
 const inquire = require('inquirer');
 const emailValidator = require('email-validator');
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
+
 
 const managerQuestions = [
     {
@@ -197,13 +195,13 @@ function startMockup() {
     .prompt(managerQuestions)
     .then(data => {
         positions.push(data);
-        otherPositions(positions);
+        checkForNewPositions(positions);
 
     })
 }
 startMockup();
 
-function otherPositions(positions) {
+function checkForNewPositions(positions) {
     
     if(positions[positions.length - 1].teamMemberAdded == 'Engineer' || positions[positions.length - 1].teamMemberAdded == 'Intern') 
     {
@@ -211,7 +209,7 @@ function otherPositions(positions) {
         .prompt(getQuestionsForPosition(positions[positions.length - 1].teamMemberAdded))
         .then(data => {
             positions.push(data);
-            otherPositions(positions);
+            checkForNewPositions(positions);
         })
     } else {
         console.log(positions);
