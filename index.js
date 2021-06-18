@@ -1,5 +1,6 @@
 const inquire = require('inquirer');
 const emailValidator = require('email-validator');
+const generateHTML = require('./src/generate-HTML');
 
 
 const managerQuestions = [
@@ -213,6 +214,7 @@ function checkForNewPositions(positions) {
         })
     } else {
         console.log(positions);
+        generateHTML(positions);
     }
 }
 
