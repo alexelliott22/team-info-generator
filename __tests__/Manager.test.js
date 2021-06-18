@@ -13,4 +13,10 @@ test('check that the correct role is returned', () => {
     const manager = new Manager('john', '652855', 'joedoe@hotmail.com', '582');
 
     expect(manager.getRole()).toBe('Manager');
+});
+
+test('check that get office number function returns a number', () => {
+    const manager = new Manager('john', '652855', 'joedoe@hotmail.com', '582');
+
+    expect(manager.getOfficeNumber()).toEqual(expect.any(String));
 })
