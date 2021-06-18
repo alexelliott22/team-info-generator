@@ -1,7 +1,7 @@
 const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
 const Manager = require('../lib/Manager');
-
+const writeToFile = require('./write-to-file');
 
 
 const positions = [
@@ -28,21 +28,6 @@ const positions = [
       }
 ];
 
-function determinePosition(teamMember) {
-    if(teamMember.github) {
-        let engineer = new Engineer(teamMember.name, teamMember.id, teamMember.email, teamMember.github)
-        
-        createTeamMemberCards(engineer);
-    } else if(teamMember.school) {
-        let intern = new Intern(teamMember.name, teamMember.id, teamMember.email, teamMember.school)
-
-        createTeamMemberCards(intern);
-    } else {
-        let manager = new Manager(teamMember.name, teamMember.id, teamMember.email, teamMember.officeNum)
-
-        createTeamMemberCards(manager);
-    }
-}
 
 function getLastQuality(teamMember) {
     if(teamMember.getRole() == 'Manager') {
@@ -54,9 +39,8 @@ function getLastQuality(teamMember) {
     }
 }
 
-function createTeamMemberCards(teamMember) {
+function createTeamMemberCard(teamMember) {
 
-    
     return `
     <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -70,17 +54,30 @@ function createTeamMemberCards(teamMember) {
     `
 }
 
-
-function lookThroughArray(positions) {
+function getTeamMemberHTML(positions) {
+   let concHTML = '';
     positions.forEach(teamMember => {
-        determinePosition(teamMember);
+        
+        if(teamMember.github) {
+            let engineer = new Engineer(teamMember.name, teamMember.id, teamMember.email, teamMember.github)
+
+            concHTML += createTeamMemberCard(engineer);
+        } else if(teamMember.school) {
+            let intern = new Intern(teamMember.name, teamMember.id, teamMember.email, teamMember.school)
+  
+            concHTML += createTeamMemberCard(intern);
+        } else {
+            let manager = new Manager(teamMember.name, teamMember.id, teamMember.email, teamMember.officeNum)
+
+             concHTML += createTeamMemberCard(manager);
+        }
     });
+
+    return concHTML;
 }
 
-
-
 function generateHTML(positions) {
-    return `
+    let html =  `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -99,7 +96,7 @@ function generateHTML(positions) {
           <div class="container">
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                ${lookThroughArray(positions)}
+                ${getTeamMemberHTML(positions)}
               </div>
             </div>
           </div>
@@ -107,11 +104,10 @@ function generateHTML(positions) {
     </body>
     </html>
     `
+    console.log(html);
+    writeToFile(html);
 }
 
-generateHTML(positions);
+// console.log(determinePosition(positions));
 
-
-
-
-// module.exports = generateHTML;
+module.exports = generateHTML;

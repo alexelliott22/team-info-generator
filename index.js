@@ -1,6 +1,7 @@
 const inquire = require('inquirer');
 const emailValidator = require('email-validator');
 const generateHTML = require('./src/generate-HTML');
+const writeToFile = require('./src/write-to-file');
 
 
 const managerQuestions = [
@@ -197,10 +198,9 @@ function startMockup() {
     .then(data => {
         positions.push(data);
         checkForNewPositions(positions);
-
     })
+    .catch(err => console.log(err));
 }
-startMockup();
 
 function checkForNewPositions(positions) {
     
@@ -213,11 +213,12 @@ function checkForNewPositions(positions) {
             checkForNewPositions(positions);
         })
     } else {
-        console.log(positions);
-        generateHTML(positions);
+        generateHTML(positions);  
     }
 }
 
 function getQuestionsForPosition(position) {
   return (position == 'Engineer'? engineerQuestions : internQuestions);
 }
+
+startMockup();
