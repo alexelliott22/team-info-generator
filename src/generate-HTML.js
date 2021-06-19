@@ -7,7 +7,7 @@ function getLastQuality(teamMember) {
     if(teamMember.getRole() == 'Manager') {
         return `<p class="card-text">Office Number: ${teamMember.getOfficeNumber()}</p>`
     } else if(teamMember.getRole() == 'Engineer') {
-        return `<p class="card-text">Github: <a href="https://github.com/${teamMember.getGithub()}">${teamMember.getGithub()}</a></p>`
+        return `<p class="card-text">Github: <a href="https://github.com/${teamMember.getGithub()}" target="_blank">${teamMember.getGithub()}</a></p>`
     } else {
         return `<p class="card-text">University: ${teamMember.getSchool()}</p>`
     }
@@ -19,10 +19,10 @@ function createTeamMemberCard(teamMember) {
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">${teamMember.name}</h5>
-                <h5 class="card-subtitle mb-2">${teamMember.getRole()}</h6>
+                <h3 class="card-title">${teamMember.name}</h3>
+                <h5 class="card-subtitle mb-2">${teamMember.getRole()}</h5>
                 <p class="card-text">ID: ${teamMember.getId()}</p>
-                <p class="card-text">Email: <a href="mailto:${teamMember.getEmail()}">${teamMember.getEmail()}</a></p>
+                <p class="card-text">Email: <a href="mailto:${teamMember.getEmail()}" target="_blank">${teamMember.getEmail()}</a></p>
                 ${getLastQuality(teamMember)}
             </div>
         </div>
