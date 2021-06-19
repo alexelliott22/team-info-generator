@@ -3,32 +3,6 @@ const Intern = require('../lib/Intern');
 const Manager = require('../lib/Manager');
 const writeToFile = require('./write-to-file');
 
-
-const positions = [
-    {
-        name: 'alex',
-        id: '3',
-        email: 'a@mail.com',
-        officeNum: '5',
-        teamMemberAdded: 'Intern'
-      },
-      {
-        name: 'b',
-        id: '5',
-        email: 'b@mail.com',
-        school: 'harding',
-        teamMemberAdded: 'Engineer'
-      },
-      {
-        name: 'joe smith',
-        id: '78',
-        email: 'js@mail.com',
-        github: 'jsmith',
-        teamMemberAdded: "I don't want to add any more team members"
-      }
-];
-
-
 function getLastQuality(teamMember) {
     if(teamMember.getRole() == 'Manager') {
         return `<p class="card-text">Office Number: ${teamMember.getOfficeNumber()}</p>`
@@ -42,15 +16,17 @@ function getLastQuality(teamMember) {
 function createTeamMemberCard(teamMember) {
 
     return `
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${teamMember.name}</h5>
-            <h6 class="card-subtitle mb-2">${teamMember.getRole()}</h6>
-            <p class="card-text">ID: ${teamMember.getId()}</p>
-            <p class="card-text">Email: <a href="mailto:${teamMember.getEmail()}">${teamMember.getEmail()}</a></p>
-            ${getLastQuality(teamMember)}
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">${teamMember.name}</h5>
+                <h5 class="card-subtitle mb-2">${teamMember.getRole()}</h6>
+                <p class="card-text">ID: ${teamMember.getId()}</p>
+                <p class="card-text">Email: <a href="mailto:${teamMember.getEmail()}">${teamMember.getEmail()}</a></p>
+                ${getLastQuality(teamMember)}
+            </div>
         </div>
-  </div>
+    </div>
     `
 }
 
@@ -89,25 +65,21 @@ function generateHTML(positions) {
         <title>My Team</title>
     </head>
     <body>
-        <header>
-            <h1>My Team</h1>
+        <header class = "header">
+            <h1 class = "text-center">My Team</h1>
         </header>
-        <div class="wrapper">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 col-lg-4">
-                ${getTeamMemberHTML(positions)}
-              </div>
+        <section id="my-team">
+            <div class="container my-3 py-5 text-center">
+                <div class="row">
+                    ${getTeamMemberHTML(positions)}
+                </div>
             </div>
-          </div>
-        </div>
+        </section>
     </body>
     </html>
     `
-    console.log(html);
+    
     writeToFile(html);
 }
-
-// console.log(determinePosition(positions));
 
 module.exports = generateHTML;
